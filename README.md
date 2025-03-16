@@ -16,4 +16,6 @@ Students working on e-commerce projects without a complex database setup.
 C++, Javascript, HTML, CSS
 
 ## App Snapshots
+![Screenshot 2025-03-12 004737](https://github.com/user-attachments/assets/f3032a16-90a4-4b89-9127-a3a32b15827e)
+
 ![Screenshot 2025-03-12 141852](https://github.com/user-attachments/assets/4cfc5ebc-a444-48fd-8713-711743c629ab)
