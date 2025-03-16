@@ -1,6 +1,6 @@
 # Ecommerce_Cart_Management
 
-Project Overview
+## Project Overview
 
 This project is a file-based e-commerce system with a C++ backend and an HTML/JavaScript frontend, designed for both users and admins. It allows users to browse products, add items to a shopping cart, and place orders, while admins can manage products. Data is stored using JSON files and text files, ensuring persistence without requiring a database.
 
