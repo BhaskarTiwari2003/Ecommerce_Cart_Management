@@ -1,0 +1,11 @@
+Order:
+Laptop (x1) - $999.99
+Smartphone (x2) - $1199.98
+Headphones (x1) - $199.99
+Total: $2399.96
+------------------------
+Order:
+Laptop (x3) - $2999.97
+Headphones (x1) - $199.99
+Total: $3199.96
+------------------------

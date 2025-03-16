@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>E-Commerce System</h1>
+        <h2>Available Products</h2>
+        <ul id="products"></ul>
+        
+        <h2>Shopping Cart</h2>
+        <ul id="cart"></ul>
+        
+        <button onclick="checkout()">Checkout</button>
+        <button onclick="viewOrders()">View Past Purchases</button>
+        <div id="orders"></div>
+    </div>
+
+    <script>
+        let products = [];
+        let cart = [];
+        const API_URL = "http://localhost:3000"; // ✅ Define API Base URL
+
+        // Fetch all products
+        async function fetchProducts() {
+            try {
+                let response = await fetch(`${API_URL}/api/products`);
+                if (!response.ok) throw new Error("Failed to fetch products");
+                products = await response.json();
+                displayProducts();
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        }
+
+        function displayProducts() {
+            let productList = document.getElementById("products");
+            productList.innerHTML = "";
+            products.forEach(product => {
+                productList.innerHTML += `<li>${product.name} - $${product.price} 
+                    <button onclick="addToCart(${product.id})">Add</button>
+                </li>`;
+            });
+        }
+
+        // Fetch cart contents
+        async function fetchCart() {
+            try {
+                let response = await fetch(`${API_URL}/api/cart`);
+                if (!response.ok) throw new Error("Failed to fetch cart");
+                cart = await response.json();
+                displayCart();
+            } catch (error) {
+                console.error("Error fetching cart:", error);
+            }
+        }
+
+        function displayCart() {
+            let cartList = document.getElementById("cart");
+            cartList.innerHTML = "";
+            cart.forEach(item => {
+                cartList.innerHTML += `<li>${item.name} (x${item.quantity}) - $${item.price * item.quantity} 
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                </li>`;
+            });
+        }
+
+        // Add item to cart
+        async function addToCart(productId) {
+            try {
+                let response = await fetch(`${API_URL}/api/cart/add/${productId}`, { method: 'POST' });
+                if (!response.ok) throw new Error("Failed to add item to cart");
+                await fetchCart();
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
+        }
+
+        // Remove item from cart
+        async function removeFromCart(productId) {
+            try {
+                let response = await fetch(`${API_URL}/api/cart/remove/${productId}`, { method: 'POST' });
+                if (!response.ok) throw new Error("Failed to remove item from cart");
+                await fetchCart();
+            } catch (error) {
+                console.error("Error removing from cart:", error);
+            }
+        }
+
+        // Checkout
+        async function checkout() {
+            try {
+                let response = await fetch(`${API_URL}/api/cart/checkout`, { method: 'POST' });
+                if (!response.ok) throw new Error("Checkout failed");
+                alert("Checkout Successful!");
+                await fetchCart();
+                await viewOrders();
+            } catch (error) {
+                console.error("Error during checkout:", error);
+            }
+        }
+
+        // View past orders
+        async function viewOrders() {
+            try {
+                let response = await fetch(`${API_URL}/api/orders`);
+                if (!response.ok) throw new Error("Failed to fetch orders");
+                
+                let orders = await response.json(); // ✅ Parse JSON properly
+                let orderList = document.getElementById("orders");
+                orderList.innerHTML = "<h3>Order History</h3>"; // Clear previous content
+        
+                if (orders.length === 0) {
+                    orderList.innerHTML += "<p>No past orders found.</p>";
+                    return;
+                }
+        
+                orders.forEach(order => {
+                    let orderDate = new Date(order.date).toLocaleString();
+                    let orderItems = order.items.map(item => 
+                        `<li>${item.name} (x${item.quantity}) - $${item.price * item.quantity}</li>`
+                    ).join("");
+        
+                    orderList.innerHTML += `
+                        <div style="border:1px solid #ccc; padding:10px; margin:10px; border-radius:5px;">
+                            <strong>Order Date:</strong> ${orderDate}
+                            <ul>${orderItems}</ul>
+                        </div>
+                    `;
+                });
+        
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+            }
+        }
+        
+
+        fetchProducts();
+        fetchCart();
+    </script>
+</body>
+</html>

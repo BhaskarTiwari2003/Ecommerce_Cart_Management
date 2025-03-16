@@ -1,0 +1,8 @@
+1 Laptop,999.99
+2 Smartphone,599.99
+3 Headphones,199.99
+4 Smartwatch,299.99
+5 Tablet,499.99
+6 MacBook,450
+7 pen,10
+8 chocolate,500
