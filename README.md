@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This project is a file-based e-commerce system with a C++ backend and an HTML/JavaScript frontend. It is designed for both users and admins, allowing users to browse products, add items to a shopping cart, and manage their purchases seamlessly. 
+This project is a file-based e-commerce system with a JavaScript backend and an HTML/JavaScript/CSS frontend. It is designed for both users and admins, allowing users to browse products, add items to a shopping cart, and manage their purchases seamlessly. 
 
 ### Key Features
 - **User Interface**: Intuitive and user-friendly interface built with HTML, CSS, and JavaScript.
-- **Backend**: Robust backend developed in C++ to handle all business logic and data management.
+- **Backend**: Robust backend developed in JavaScript to handle all business logic and data management.
 - **File-Based System**: Lightweight solution without the need for a complex database setup.
 - **Admin Controls**: Admin functionalities to manage products, view orders, and maintain the system.
 
@@ -16,7 +16,7 @@ This project is a file-based e-commerce system with a C++ backend and an HTML/Ja
 - **Students**: Perfect for students working on e-commerce projects without a complex database setup.
 
 ## 🛠 Skills
-- **Languages**: C++, JavaScript, HTML, CSS
+- **Languages**: JavaScript, HTML, CSS
 - **Technologies**: File-based storage, Web development
 
 ## App Snapshots
@@ -27,7 +27,6 @@ This project is a file-based e-commerce system with a C++ backend and an HTML/Ja
 ## Getting Started
 
 ### Prerequisites
-- C++ compiler (e.g., GCC)
 - Web browser (e.g., Chrome, Firefox)
 
 ### Installation
@@ -39,9 +38,9 @@ This project is a file-based e-commerce system with a C++ backend and an HTML/Ja
     ```sh
     cd Ecommerce_Cart_Management
     ```
-3. Compile the C++ backend:
+3. Connect the NodeJS backend:
     ```sh
-    g++ -o backend backend.cpp
+    g++ -o backend backend.JS
     ```
 4. Open the `index.html` file in your web browser to start the application.
 
